@@ -1,3 +1,18 @@
+# Private files / data
+data/
+*.pdf
+*.csv
+
+# Secrete keys
+*key*
+*api*
+*.key
+*.keys
+
+# IDE files
+*.DS_Store
+Thumbs.db
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
