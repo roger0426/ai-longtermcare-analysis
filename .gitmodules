@@ -1,0 +1,3 @@
+[submodule "docling"]
+	path = docling
+	url = https://github.com/DS4SD/docling.git
