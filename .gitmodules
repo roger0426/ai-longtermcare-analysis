@@ -1,0 +1,3 @@
+[submodule "pdf2docx"]
+	path = pdf2docx
+	url = git@github.com:ArtifexSoftware/pdf2docx.git
