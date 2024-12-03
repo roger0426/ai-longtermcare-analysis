@@ -1,7 +1,13 @@
 import pdfplumber
+import os
 
 
 def parse_pdf(pdf_loc, page_infos: list = None):
+
+    dir_path = os.path.join('../extracted_data/', os.path.basename(pdf_loc).split('.')[0])
+
+    if not os.path.exists(dir_path):
+        os.makedirs(dir_path)
 
     with pdfplumber.open(pdf_loc) as pdf:
         pages = pdf.pages[page_infos[0]:page_infos[1]] if page_infos else pdf.pages
@@ -10,17 +16,17 @@ def parse_pdf(pdf_loc, page_infos: list = None):
             words = page.extract_words()
             words_im = page.to_image()
             words_im.draw_rects(words)
-            words_im.save(f'../extracted_data/words{i}.jpg')
+            words_im.save(os.path.join(dir_path, f'words{i}.jpg'))
 
             tables = page.extract_tables()
-            with open(f'../extracted_data/table{i}.txt', 'w') as file:
+            with open(os.path.join(dir_path, f'table{i}.txt'), 'w') as file:
                 if tables is not None:
                     for table in tables:
                         if table is not None:
                             for item in table:
                                 file.write(f"{item}\n")
 
-            with open(f'../extracted_data/text{i}.txt', 'w') as file:
+            with open(os.path.join(dir_path, f'text{i}.txt'), 'w') as file:
                 file.write(page.extract_text())
 
             
@@ -30,7 +36,7 @@ def parse_pdf(pdf_loc, page_infos: list = None):
             checked_checkboxes_im = page.to_image()
             checked_checkboxes_im.draw_rects(checked_checkboxes, stroke='red')
             checked_checkboxes_im.draw_rects(notchecked_checkboxes, stroke='blue')
-            checked_checkboxes_im.save(f'../extracted_data/checkbox{i}.jpg', stroke='red')
+            checked_checkboxes_im.save(os.path.join(dir_path, f'checkbox{i}.jpg'), stroke='red')
 
 if __name__ == '__main__':
-    parse_pdf('../data/data1.pdf', [0, 11])
+    parse_pdf('../data/照顧管理評估量表_勾選.pdf')
