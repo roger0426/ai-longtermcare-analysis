@@ -7,8 +7,8 @@ def read_json_template(file_path: Path):
         return json.load(file)
 
 def save_json_result(file_path: Path, data: dict):
-    with file_path.open('w', encoding='utf-8') as file:
-        json.dump(data, file, indent=2)
+    with file_path.open('w') as file:
+        json.dump(data, file, indent=2, ensure_ascii=False)
 
 def read_raw_data(file_path: Path):
     return file_path.read_text(encoding='utf-8')
