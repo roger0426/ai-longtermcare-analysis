@@ -36,7 +36,7 @@ def main():
                                                        template=template)
     response = llm_client.request(system_prompt, user_prompt)
     print(response)
-    # save_json_result(Path('output.json'), json.loads(response))
+    save_json_result(Path('output.json'), json.loads(response))
 
 
 if __name__ == '__main__':

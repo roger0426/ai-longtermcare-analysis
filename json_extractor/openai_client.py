@@ -21,7 +21,7 @@ class OpenAIClient:
             raise ValueError("OpenAI API key not found. Please set it in the .env file.")
         self.client = OpenAI(api_key=api_key)
 
-    def request(self, system_prompt, user_prompt):
+    def request(self, system_prompt, user_prompt, json_mode=True):
         """
         Generate a response from the OpenAI API.
 
@@ -41,8 +41,10 @@ class OpenAIClient:
                         "role": "user",
                         "content": user_prompt
                     }
+
                 ],
-                temperature=0.0
+                response_format={"type": "json_object"} if json_mode else None,
+                temperature=0.0,
             )
             return completion.choices[0].message.content
         except openai.OpenAIError:
