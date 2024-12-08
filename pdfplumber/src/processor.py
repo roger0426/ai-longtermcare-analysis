@@ -9,6 +9,7 @@ def parse_pdf(pdf_loc, page_infos: list = None):
     if not os.path.exists(dir_path):
         os.makedirs(dir_path)
 
+    text = ""
     with pdfplumber.open(pdf_loc) as pdf:
         pages = pdf.pages[page_infos[0]:page_infos[1]] if page_infos else pdf.pages
         for i, page in enumerate(pages):
@@ -26,6 +27,8 @@ def parse_pdf(pdf_loc, page_infos: list = None):
                             for item in table:
                                 file.write(f"{item}\n")
 
+
+            text += page.extract_text() + '\n'
             with open(os.path.join(dir_path, f'text{i}.txt'), 'w') as file:
                 file.write(page.extract_text())
 
@@ -37,6 +40,8 @@ def parse_pdf(pdf_loc, page_infos: list = None):
             checked_checkboxes_im.draw_rects(checked_checkboxes, stroke='red')
             checked_checkboxes_im.draw_rects(notchecked_checkboxes, stroke='blue')
             checked_checkboxes_im.save(os.path.join(dir_path, f'checkbox{i}.jpg'), stroke='red')
+    with open(os.path.join(dir_path, f'text_all.txt'), 'w') as file:
+        file.write(text)
 
 if __name__ == '__main__':
     parse_pdf('../data/照顧管理評估量表_勾選.pdf')
