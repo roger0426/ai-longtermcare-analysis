@@ -43,5 +43,12 @@ def parse_pdf(pdf_loc, page_infos: list = None):
     with open(os.path.join(dir_path, f'text_all.txt'), 'w') as file:
         file.write(text)
 
+def extract_text_from_pdf(pdf_path: str) -> str:
+    text = ""
+    with pdfplumber.open(pdf_path) as pdf:
+        for i, page in enumerate(pdf.pages):
+            text += page.extract_text() + '\n'
+    return text
+
 if __name__ == '__main__':
-    parse_pdf('../data/照顧管理評估量表_勾選.pdf')
+    print(extract_text_from_pdf('../data/照顧管理評估量表_勾選.pdf'))
