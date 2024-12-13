@@ -1,6 +1,3 @@
-Here's the complete README.md file in a single markdown block:
-
-```markdown
 # AI Long-term Care Analysis
 
 A Python-based tool for extracting and analyzing long-term care assessment data from PDF documents using OCR and AI-powered text processing.
