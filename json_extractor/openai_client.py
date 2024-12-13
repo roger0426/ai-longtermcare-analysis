@@ -3,7 +3,7 @@ import traceback
 
 import openai
 from dotenv import load_dotenv
-from openai import OpenAI
+from openai import AsyncOpenAI
 
 
 class OpenAIClient:
@@ -19,9 +19,9 @@ class OpenAIClient:
         api_key = os.getenv('OPENAI_API_KEY')
         if not api_key:
             raise ValueError("OpenAI API key not found. Please set it in the .env file.")
-        self.client = OpenAI(api_key=api_key)
+        self.client = AsyncOpenAI(api_key=api_key)
 
-    def request(self, system_prompt, user_prompt, json_mode=True):
+    async def request(self, system_prompt: str, user_prompt: str) -> str:
         """
         Generate a response from the OpenAI API.
 
@@ -33,7 +33,7 @@ class OpenAIClient:
             str: The API-generated response.
         """
         try:
-            completion = self.client.chat.completions.create(
+            completion = await self.client.chat.completions.create(
                 model=self.model,
                 messages=[
                     {"role": "system", "content": system_prompt},
@@ -43,7 +43,7 @@ class OpenAIClient:
                     }
 
                 ],
-                response_format={"type": "json_object"} if json_mode else None,
+                response_format={"type": "json_object"},
                 temperature=0.0,
             )
             return completion.choices[0].message.content
