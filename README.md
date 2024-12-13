@@ -40,7 +40,12 @@ OPENAI_API_KEY=your_api_key_here
 
 2. Run the main script:
 ```bash
-python -m main
+python -m main -i input_file_path -o output_folder_path
+```
+
+Example (default):
+```
+python -m main -i ./pdf_data/sample.pdf -o ./outputs
 ```
 
 The script will:
