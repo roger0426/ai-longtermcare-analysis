@@ -137,7 +137,7 @@ celerybeat.pid
 *.sage.py
 
 # Environments
-.env
+json_extractor/.env
 .venv
 env/
 venv/
@@ -177,3 +177,4 @@ cython_debug/
 #.idea/
 
 outputs/
+.idea/

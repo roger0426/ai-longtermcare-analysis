@@ -7,7 +7,7 @@ from openai import AsyncOpenAI
 
 
 class OpenAIClient:
-    def __init__(self, model="gpt-4o"):
+    def __init__(self, model="gpt-4o") -> None:
         """
         OpenAIClient for interacting with the OpenAI API.
 
