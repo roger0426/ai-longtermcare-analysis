@@ -116,3 +116,9 @@ The tool generates structured JSON output containing detailed assessment data. H
 
 The JSON output includes comprehensive assessment data across multiple sections (A through K), each containing binary indicators, text fields, or numeric values as applicable.
 
+
+## Website usage
+```bash
+python app.py
+```
+
