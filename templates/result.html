@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Parsed Result</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>Parsed PDF Result</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Section</th>
+                <th>Content</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for section, content in extracted_data.items() %}
+            <tr>
+                <td>{{ section }}</td>
+                <td>{{ content }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ url_for('upload_file') }}">Upload another file</a>
+</body>
+</html>
