@@ -3,7 +3,7 @@ from pathlib import Path
 import asyncio
 
 from json_repair import repair_json
-from json_extractor.openai_client import OpenAIClient
+from json_extractor.openai_client import AzureOpenAIClient
 from json_extractor.prompt import example_prompt, extraction_prompt
 from json_extractor.utils import read_json_template, read_raw_data, save_json_result
 
@@ -11,7 +11,7 @@ from json_extractor.utils import read_json_template, read_raw_data, save_json_re
 def get_templates(template_dir: str = "templates") -> dict[str, dict]:
     current_dir = Path(__file__).parent
     template_dir = (current_dir / template_dir).resolve()
-    
+
     if not template_dir.exists():
         raise FileNotFoundError(f"Template directory not found: {template_dir}")
     if not template_dir.is_dir():
@@ -37,7 +37,7 @@ async def extract_json(
     example: str = example_prompt.DOCLING_EXAMPLE,
     output_dir: str = "outputs",
 ) -> dict:
-    llm_client = OpenAIClient()
+    llm_client = AzureOpenAIClient()
     templates = get_templates(template_dir)
     if isinstance(raw_data, Path):
         raw_data = get_raw_data(raw_data)
